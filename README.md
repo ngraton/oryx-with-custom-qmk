@@ -32,6 +32,10 @@ Each time you run the GitHub Action, the workflow will:
 7. Flash your downloaded firmware using [Keymapp](https://www.zsa.io/flash#flash-keymap).
 8. Enjoy!
 
+## Troubleshooting
+
+If the build fails with redeclaration errors or invalid driver types, **try re-compiling your layout in Oryx first** (click "Compile this layout"), then re-run the GitHub Action. ZSA periodically updates the QMK firmware structure (e.g. moving built-in drivers to QMK modules), and Oryx adapts its generated code accordingly. An older Oryx export may be incompatible with the current firmware branch.
+
 ## Oryx Chrome extension
 
 To make building even easier, [@nivekmai](https://github.com/nivekmai) created an [Oryx Chrome extension](https://chromewebstore.google.com/detail/oryx-extension/bocjciklgnhkejkdfilcikhjfbmbcjal) to be able to trigger the GitHub Actions from inside Oryx itself.
