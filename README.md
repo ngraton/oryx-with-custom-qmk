@@ -1,8 +1,8 @@
-# Oryx with custom QMK
+# Voyager Custom Firmware Builder
 
-This repository allows combining the convenience of [Oryx’s](https://www.zsa.io/oryx) graphical layout editing with the power of [QMK](https://qmk.fm), allowing you to customize your Oryx layout with advanced QMK features like Achordion and Repeat Key, while automating firmware builds through GitHub Actions.
+Custom QMK firmware for my [ZSA Voyager](https://www.zsa.io/voyager), combining [Oryx](https://www.zsa.io/oryx) layout editing with custom QMK features and RGB animations. Built on top of [poulainpi/oryx-with-custom-qmk](https://github.com/poulainpi/oryx-with-custom-qmk) — see the [blog post](https://blog.zsa.io/oryx-custom-qmk-features) for background.
 
-For a detailed guide, check out the full [blog post here](https://blog.zsa.io/oryx-custom-qmk-features).
+The main addition is custom RGB matrix animations using a cyberpunk/neon color palette (neon purple, neon yellow, neon green, neon pink) — effects that aren’t possible through Oryx alone.
 
 ## How it works
 
