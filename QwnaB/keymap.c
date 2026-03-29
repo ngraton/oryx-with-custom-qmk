@@ -11,35 +11,29 @@ enum custom_keycodes {
   HSV_43_255_255,
   HSV_74_255_255,
   ST_MACRO_0,
-  DRAG_SCROLL,
-  TOGGLE_SCROLL,
-  NAVIGATOR_INC_CPI,
-  NAVIGATOR_DEC_CPI,
-  NAVIGATOR_TURBO,
-  NAVIGATOR_AIM
 };
 
 
 
-#define DUAL_FUNC_0 LT(8, KC_F2)
-#define DUAL_FUNC_1 LT(9, KC_0)
-#define DUAL_FUNC_2 LT(11, KC_R)
-#define DUAL_FUNC_3 LT(6, KC_F11)
-#define DUAL_FUNC_4 LT(8, KC_Q)
-#define DUAL_FUNC_5 LT(6, KC_F10)
-#define DUAL_FUNC_6 LT(12, KC_F11)
-#define DUAL_FUNC_7 LT(5, KC_F5)
-#define DUAL_FUNC_8 LT(10, KC_F15)
-#define DUAL_FUNC_9 LT(6, KC_N)
-#define DUAL_FUNC_10 LT(11, KC_F1)
+#define DUAL_FUNC_0 LT(4, KC_L)
+#define DUAL_FUNC_1 LT(7, KC_G)
+#define DUAL_FUNC_2 LT(1, KC_S)
+#define DUAL_FUNC_3 LT(15, KC_F24)
+#define DUAL_FUNC_4 LT(14, KC_F17)
+#define DUAL_FUNC_5 LT(11, KC_Y)
+#define DUAL_FUNC_6 LT(9, KC_F13)
+#define DUAL_FUNC_7 LT(4, KC_F)
+#define DUAL_FUNC_8 LT(5, KC_F5)
+#define DUAL_FUNC_9 LT(8, KC_F5)
+#define DUAL_FUNC_10 LT(14, KC_C)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     DUAL_FUNC_0,    KC_2,           KC_3,           DUAL_FUNC_1,    KC_5,           DUAL_FUNC_2,                                    DUAL_FUNC_9,    KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           
-    DUAL_FUNC_3,    DUAL_FUNC_4,    DUAL_FUNC_5,    DUAL_FUNC_6,    DUAL_FUNC_7,    KC_DELETE,                                      KC_BSLS,        KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           
+    DUAL_FUNC_3,    DUAL_FUNC_4,    DUAL_FUNC_5,    DUAL_FUNC_6,    DUAL_FUNC_7,    KC_CAPS,                                        ALL_T(KC_BSLS), KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           
     KC_A,           KC_S,           KC_D,           KC_F,           KC_G,           DUAL_FUNC_8,                                    MEH_T(KC_QUOTE),KC_H,           KC_J,           KC_K,           KC_L,           KC_SCLN,        
-    MT(MOD_LCTL, KC_Z),LT(4, KC_X),    LT(2, KC_C),    MT(MOD_RSFT, KC_V),MT(MOD_LALT, KC_B),KC_CAPS,                                        KC_HYPR,        MT(MOD_RALT, KC_N),MT(MOD_RSFT, KC_M),LT(1, KC_COMMA),LT(4, KC_DOT),  MT(MOD_RCTL, KC_SLASH),
-                                                    LT(1, KC_ENTER),MT(MOD_LGUI, KC_TAB),                                DUAL_FUNC_10,   LT(2, KC_BSPC)
+    MT(MOD_LCTL, KC_Z),LT(4, KC_X),    LT(2, KC_C),    MT(MOD_RSFT, KC_V),MT(MOD_LALT, KC_B),KC_DELETE,                                      KC_BSPC,        MT(MOD_RALT, KC_N),MT(MOD_RSFT, KC_M),LT(1, KC_COMMA),LT(4, KC_DOT),  MT(MOD_RCTL, KC_SLASH),
+                                                    LT(1, KC_ENTER),MT(MOD_LGUI, KC_TAB),                                DUAL_FUNC_10,   LT(2, KC_ENTER)
   ),
   [1] = LAYOUT_voyager(
     KC_F1,          KC_F2,          KC_F3,          KC_F4,          KC_F5,          KC_F11,                                         KC_F12,         KC_F6,          KC_F7,          KC_F8,          KC_F9,          KC_F10,         
@@ -151,18 +145,6 @@ bool rgb_matrix_indicators_user(void) {
   }
 
   return true;
-}
-
-extern bool set_scrolling;
-extern bool navigator_turbo;
-extern bool navigator_aim;
-void pointing_device_init_user(void) {
-  set_auto_mouse_enable(true);
-}
-
-bool is_mouse_record_user(uint16_t keycode, keyrecord_t* record) {
-  // All keys are not mouse keys when one shot auto mouse is enabled.
-  return false;
 }
 
 
@@ -357,43 +339,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }  
       }  
       return false;
-    case DRAG_SCROLL:
-      if (record->event.pressed) {
-        set_scrolling = true;
-      } else {
-        set_scrolling = false;
-      }
-      return false;
-    case TOGGLE_SCROLL:
-      if (record->event.pressed) {
-        set_scrolling = !set_scrolling;
-      }
-      return false;
-    break;
-  case NAVIGATOR_TURBO:
-    if (record->event.pressed) {
-      navigator_turbo = true;
-    } else {
-      navigator_turbo = false;
-    }
-    return false;
-  case NAVIGATOR_AIM:
-    if (record->event.pressed) {
-      navigator_aim = true;
-    } else {
-      navigator_aim = false;
-    }
-    return false;
-  case NAVIGATOR_INC_CPI:
-    if (record->event.pressed) {
-        pointing_device_set_cpi(1);
-    }
-    return false;
-  case NAVIGATOR_DEC_CPI:
-    if (record->event.pressed) {
-        pointing_device_set_cpi(0);
-    }
-    return false;
     case RGB_SLD:
       if (record->event.pressed) {
         rgblight_mode(1);
